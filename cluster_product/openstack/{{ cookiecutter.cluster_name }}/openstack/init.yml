@@ -1,60 +1,59 @@
 classes:
-  - system.salt.minion.cert.mysql.server
-  - system.salt.minion.cert.rabbitmq_server
-  - system.linux.system.lowmem
-  - system.linux.system.repo.mcp.openstack
-  - system.linux.system.repo.mcp.extra
-  - system.linux.storage.loopback
-  - service.rabbitmq.server.ssl
-  - system.rabbitmq.server.vhost.openstack
-  - system.keystone.server.wsgi
-  - system.keystone.server.single
-  - service.galera.ssl
-  - service.galera.master.cluster
-  - system.galera.server.database.cinder
-  - system.galera.server.database.designate
-  - system.galera.server.database.glance
-  - system.galera.server.database.heat
-  - system.galera.server.database.keystone
-  - system.galera.server.database.nova
-  - system.keystone.client.single
-  - system.keystone.client.service.cinder3
-  - system.keystone.client.service.nova21
-  - system.keystone.client.service.nova-placement
-  - system.keystone.client.service.designate
-  - system.glance.control.single
-  - system.nova.control.single
-  - system.neutron.control.openvswitch.single
-  - system.neutron.client.service.public
-  - system.heat.server.single
-  - system.nova.compute.single
-  - service.neutron.gateway.single
-  - system.cinder.control.single
-  - system.cinder.control.backend.lvm
-  - service.cinder.volume.single
-  - system.cinder.volume.backend.lvm
-  - system.horizon.server.single
-  - system.bind.server.single
-  - system.designate.server.single
-  - system.designate.server.backend.bind
-  - service.runtest.tempest
+- system.salt.minion.cert.mysql.server
+- system.salt.minion.cert.rabbitmq_server
+- system.linux.system.lowmem
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
+- system.linux.storage.loopback
+- service.rabbitmq.server.ssl
+- system.rabbitmq.server.vhost.openstack
+- system.keystone.server.wsgi
+- system.keystone.server.single
+- service.galera.ssl
+- service.galera.master.cluster
+- system.galera.server.database.cinder
+- system.galera.server.database.designate
+- system.galera.server.database.glance
+- system.galera.server.database.heat
+- system.galera.server.database.keystone
+- system.galera.server.database.nova
+- system.keystone.client.single
+- system.keystone.client.service.cinder3
+- system.keystone.client.service.nova21
+- system.keystone.client.service.nova-placement
+- system.keystone.client.service.designate
+- system.glance.control.single
+- system.nova.control.single
+- system.neutron.control.openvswitch.single
+- system.neutron.client.service.public
+- system.heat.server.single
+- system.nova.compute.single
+- service.neutron.gateway.single
+- system.cinder.control.single
+- system.cinder.control.backend.lvm
+- service.cinder.volume.single
+- system.cinder.volume.backend.lvm
+- system.horizon.server.single
+- system.bind.server.single
+- system.designate.server.single
+- system.designate.server.backend.bind
+- service.runtest.tempest
 
-  # not openstack related
-  - system.linux.network.dynamic_hosts
-  - service.git.client
-  - system.linux.system.single.debian
-  - system.linux.system.repo.mcp.salt
-  - system.openssh.client.lab
-  - system.salt.minion.ca.salt_master
-  - system.salt.minion.cert.proxy
-  - system.reclass.storage.salt
-  - system.mysql.client
-  - system.memcached.server.single
-  - system.rabbitmq.server.single
-  - system.auditd.server.ciscat
-  - cluster.overrides
-  - cluster.{{ cookiecutter.cluster_name }}.infra
-
+# not openstack related
+- system.linux.network.dynamic_hosts
+- service.git.client
+- system.linux.system.single.debian
+- system.linux.system.repo.mcp.salt
+- system.openssh.client.lab
+- system.salt.minion.ca.salt_master
+- system.salt.minion.cert.proxy
+- system.reclass.storage.salt
+- system.mysql.client
+- system.memcached.server.single
+- system.rabbitmq.server.single
+- system.auditd.server.ciscat
+- cluster.{{ cookiecutter.cluster_name }}.infra
+- cluster.overrides
 parameters:
   _param:
     reclass_data_repository: https://gerrit.mcp.mirantis.net/salt-models/mcp-virtual-aio
@@ -62,7 +61,7 @@ parameters:
     reclass_config_master: {{ cookiecutter.reclass_config_master }}
     single_address: {{ cookiecutter.infra_config_address }}
     infra_config_address: ${_param:single_address}
-    cluster_domain: virtual-mcp11-aio.local
+    cluster_domain: {{ cookiecutter.cluster_domain }}
     cluster_name: {{ cookiecutter.cluster_name }}
     infra_config_hostname: cfg01
 
@@ -88,7 +87,6 @@ parameters:
     heat_version: ${_param:openstack_version}
     horizon_version: ${_param:openstack_version}
     designate_version: ${_param:openstack_version}
-    keystone_service_token: workshop
     keystone_service_host: ${_param:single_address}
     heat_service_host: ${_param:single_address}
     neutron_service_host: ${_param:single_address}

@@ -1,5 +1,6 @@
 {
   "cluster_name":                   "deployment_name",
+  "cluster_domain":                 "deployment_name.local",
   "mcp_version":                    "stable",
   "openstack_version":              "pike",
 
