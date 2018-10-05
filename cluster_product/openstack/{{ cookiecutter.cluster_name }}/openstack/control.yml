@@ -1,0 +1,223 @@
+classes:
+- system.keystone.server.wsgi
+- system.keystone.server.single
+- system.glance.control.single
+- system.nova.control.single
+- system.neutron.control.openvswitch.single
+- system.neutron.client.service.public
+- system.heat.server.single
+- system.nova.compute.single
+- system.cinder.control.single
+- system.cinder.control.backend.lvm
+- service.cinder.volume.single
+- system.cinder.volume.backend.lvm
+{%- if cookiecutter.designate_enabled == 'True' %}
+- system.bind.server.single
+- system.designate.server.single
+- system.designate.server.backend.bind
+{%- endif %}
+{%- if cookiecutter.tempest_enabled == 'True' %}
+- service.runtest.tempest
+{%- endif %}
+- service.git.client
+- system.openssh.client.lab
+- system.salt.minion.cert.mysql.server
+- system.salt.minion.cert.rabbitmq_server
+- system.salt.minion.cert.proxy
+- system.memcached.server.single
+- system.auditd.server.ciscat
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  neutron:
+    server:
+      pkgs:
+        - neutron-server
+        - python-neutron-lbaas
+        - gettext-base
+        - python-pycadf
+        - neutron-plugin-ml2
+      api_workers: 2
+      rpc_state_report_workers: 2
+      rpc_workers: 2
+      message_queue:
+        ~members:
+          - host: ${_param:single_address}
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+  nova:
+    compute:
+      vncproxy_url: http://${_param:single_address}:6080
+      network:
+        user: neutron
+        password: ${_param:keystone_neutron_password}
+        tenant: service
+      cache:
+        ~members:
+        - host: ${_param:single_address}
+          port: 11211
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+      # Since in AIO by default option config_drive is false,
+      # due to nova controller and compute states rewrite
+      # configs each, we must set config_drive option
+      # explicitly for runtest formula to discover the correct settings
+      config_drive:
+        forced: false
+    controller:
+      vncproxy_url: http://${_param:single_address}:6080
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+  cinder:
+    controller:
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+    volume:
+      cache:
+        ~members:
+        - host: ${_param:single_address}
+          port: 11211
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+{%- if cookiecutter.designate_enabled == 'True' %}
+  designate:
+    server:
+      quota:
+        zones: ${_param:designate_quota_zones}
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+    worker:
+      enabled: ${_param:designate_worker_enabled}
+{%- endif %}
+  glance:
+    client:
+      enabled: True
+    server:
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+  keystone:
+    server:
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+    client:
+      enabled: true
+      server:
+        identity:
+          admin:
+            api_version: 3
+  heat:
+    server:
+      database:
+        ssl:
+          enabled: ${_param:galera_ssl_enabled}
+      message_queue:
+        port: ${_param:rabbitmq_port}
+        ssl:
+          enabled: ${_param:rabbitmq_ssl_enabled}
+{%- if cookiecutter.tempest_enabled == 'True' %}
+  runtest:
+    enabled: True
+    salttest:
+      enabled: True
+    tempest:
+      enabled: True
+      cfg_dir: ${_param:runtest_tempest_cfg_dir}
+      cfg_name: ${_param:runtest_tempest_cfg_name}
+      convert_to_uuid:
+        network:
+          public_network_id: ${_param:runtest_tempest_public_net}
+      compute:
+        build_timeout: 600
+        min_microversion: 2.1
+        max_microversion: 2.53
+      orchestration:
+        max_template_size: 5440000
+        max_resources_per_stack: 20000
+      dns_feature_enabled:
+        # Switch this to designate_admin_api_enabled once [1] is promoted to stable packages
+        # [1] https://gerrit.mcp.mirantis.net/gitweb?p=salt-formulas/designate.git;a=commit;h=96a3f43f6cf1149559e54a00b5548bdf46333749
+        api_admin: false
+        api_v1: false
+        api_v2: true
+        api_v2_quotas: true
+        api_v2_root_recordsets: true
+        bug_1573141_fixed: true
+      volume-feature-enabled:
+        backup: false
+      network:
+        floating_network_name: ${_param:runtest_tempest_public_net}
+    artifact_collector:
+      enabled: true
+      artifactory:
+        enabled: true
+        user: ${_param:artifactory_user}
+        password: ${_param:artifactory_password}
+        host: artifactory.mcp.mirantis.net
+        port: 443
+        proto: https
+        endpoint: /oscore-local/${_param:cluster_domain}/${_param:infra_config_hostname}
+      artifacts:
+        sys_logs:
+          path: /var/log
+        etc:
+          path: /etc
+      cmds:
+        service_status:
+          cmd: "(. /root/keystonercv3; openstack compute service list; openstack volume service list; openstack catalog list)"
+          dst: /tmp/openstack_service_report.txt
+{%- endif %}
+  openssh:
+    server:
+      password_auth: true
+      permit_root_login: true
+  linux:
+    system:
+      user:
+        root:
+          enabled: true
+          # r00tme
+          password: $6$9ojWyyN.$26Vj46JtCUL6C7XBQ8RmQTZLwo8/8SkqTRElXh0X2YBLrt7E/aVe2AYQ5gguYUwUknZNOSn5q7M9M3Jyf2gof/
+      repo:
+        linux_system_repo:
+          source: ${_param:linux_system_repo}
+          architectures: amd64
+          clean_file: true
+          pin:
+            - pin: ${_param:linux_system_repo_pin}
+              priority: ${_param:linux_system_repo_priority}
+              package: "*"

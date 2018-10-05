@@ -4,6 +4,9 @@
   "mcp_version":                    "stable",
   "openstack_version":              "pike",
 
+  "designate_enabled":              "True",
+  "tempest_enabled":                "False",
+
   "neutron_public_subnet_gateway":  "192.168.130.1",
   "neutron_public_subnet_cidr":     "192.168.130.0/24",
   "neutron_public_subnet_start":    "192.168.130.10",

@@ -1,0 +1,10 @@
+classes:
+- system.horizon.server.single
+parameters:
+  horizon:
+    server:
+      secure: False
+      identity:
+        encryption: ${_param:horizon_identity_encryption}
+      api_versions:
+        identity: 3

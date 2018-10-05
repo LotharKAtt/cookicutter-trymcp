@@ -1,0 +1,18 @@
+classes:
+- system.linux.system.lowmem
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.salt
+- system.linux.system.single.debian
+- system.linux.storage.loopback
+- cluster.{{ cookiecutter.cluster_name }}.control
+- cluster.{{ cookiecutter.cluster_name }}.control_init
+- cluster.{{ cookiecutter.cluster_name }}.secret
+- cluster.{{ cookiecutter.cluster_name }}.proxy
+- cluster.{{ cookiecutter.cluster_name }}.dashboard
+- cluster.{{ cookiecutter.cluster_name }}.gateway
+- cluster.{{ cookiecutter.cluster_name }}.message_queue
+- cluster.{{ cookiecutter.cluster_name }}.database
+- cluster.{{ cookiecutter.cluster_name }}.database_init
+- cluster.{{ cookiecutter.cluster_name }}.networking
+- cluster.{{ cookiecutter.cluster_name }}

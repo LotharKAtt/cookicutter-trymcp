@@ -1,0 +1,9 @@
+classes:
+- service.rabbitmq.server.ssl
+- system.rabbitmq.server.vhost.openstack
+- system.rabbitmq.server.single
+parameters:
+  rabbitmq:
+    server:
+      ssl:
+        enabled: ${_param:rabbitmq_ssl_enabled}
