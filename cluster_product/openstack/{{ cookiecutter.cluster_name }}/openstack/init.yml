@@ -4,8 +4,12 @@ parameters:
     mysql_cluster_role: master
     loopback_device_size: 20
     salt_minion_ca_host: ${linux:network:fqdn}
+
     openstack_version: {{ cookiecutter.openstack_version }}
     openstack_node_role: primary
+    aio01_node_hostname: {{ cookiecutter.aio_node_hostname }}
+    aio01_node_addresss: ${_param:single_address}
+
     cluster_public_host: ${_param:single_address}
     cluster_public_protocol: http
     openstack_region: CustomRegion

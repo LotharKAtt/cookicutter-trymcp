@@ -2,6 +2,7 @@ classes:
 - service.rabbitmq.server.ssl
 - system.rabbitmq.server.vhost.openstack
 - system.rabbitmq.server.single
+- system.salt.minion.cert.rabbitmq_server
 parameters:
   rabbitmq:
     server:

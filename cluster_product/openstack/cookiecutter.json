@@ -4,6 +4,8 @@
   "mcp_version":                    "stable",
   "openstack_version":              "pike",
 
+  "aio_node_hostname":              "aio01",
+
   "designate_enabled":              "True",
   "tempest_enabled":                "False",
 

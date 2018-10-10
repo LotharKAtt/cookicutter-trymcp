@@ -16,3 +16,12 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.database_init
 - cluster.{{ cookiecutter.cluster_name }}.networking
 - cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  linux:
+    network:
+      host:
+        aio01:
+          address: ${_param:aio01_node_address}
+          names:
+          - ${_param:aio_node_hostname}
+          - ${_param:aio_node_hostname}.${_param:cluster_domain}
