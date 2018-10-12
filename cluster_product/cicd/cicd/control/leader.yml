@@ -1,0 +1,24 @@
+classes:
+# Services
+- system.docker.client
+# Jenkins
+- system.jenkins.master.config
+- system.jenkins.client
+- system.jenkins.client.node
+# ..credentials
+- system.jenkins.client.credential.gerrit
+- system.jenkins.client.credential.salt
+# ..security
+- system.jenkins.client.security.ldap
+- system.jenkins.client.security.matrix
+# ..jobs
+- system.jenkins.client.job.git-mirrors.downstream.pipelines
+- system.jenkins.client.job.deploy.update.package
+- system.jenkins.client.job.deploy.update.config
+# Gerrit
+- system.gerrit.client
+- system.gerrit.client.project.ci
+# OpenLDAP
+- system.openldap.client
+- system.openldap.client.people.admin
+- system.docker.swarm.master

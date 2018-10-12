@@ -1,0 +1,43 @@
+classes:
+- system.nginx.server.proxy.cicd.gerrit
+- system.nginx.server.proxy.cicd.jenkins
+- system.nginx.server.stream.gerrit_ssh
+- system.salt.minion.cert.proxy
+parameters:
+  _param:  
+    cluster_public_host: ${_param:single_address}
+    nginx_proxy_gerrit_server_stream_host: ${_param:single_address}
+    nginx_proxy_gerrit_server_proxy_host: 127.0.0.1
+    nginx_proxy_gerrit_server_proxy_port: 18083
+    nginx_proxy_gerrit_server_site_host: ${_param:single_address}
+    nginx_proxy_gerrit_server_site_port: 8080
+    nginx_proxy_jenkins_server_proxy_host: 127.0.0.1
+    nginx_proxy_jenkins_server_proxy_port: 18081
+    nginx_proxy_jenkins_server_site_host: ${_param:single_address}
+    nginx_proxy_jenkins_server_site_port: 8081
+    nginx_proxy_ssl:
+      enabled: false
+      authority: ${_param:salt_minion_ca_authority}
+      engine: salt
+      mode: secure
+      key_file:  /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.key
+      cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
+      chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
+  nginx:
+    server:
+      enabled: true
+      stream:
+        nginx_proxy_openldap:
+          backend:
+            openldap:
+              address: 127.0.0.1
+              port: 1389
+          host:
+            port: 389
+        nginx_proxy_openldap_ssl:
+          backend:
+            openldap:
+              address: 127.0.0.1
+              port: 1636
+          host:
+            port: 636

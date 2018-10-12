@@ -1,10 +1,10 @@
 {
-  "cluster_name":                   "deployment_name",
-  "cluster_domain":                 "deployment_name.local",
-  "mcp_version":                    "stable",
+  "cluster_name":                   "trymcp",
+  "cluster_domain":                 "trymcp.local",
+  "mcp_version":                    "2018.8.0",
   "openstack_version":              "pike",
 
-  "aio_node_hostname":              "aio01",
+  "aio_node_hostname":              "aos01",
 
   "designate_enabled":              "True",
   "tempest_enabled":                "False",
@@ -15,5 +15,30 @@
   "neutron_public_subnet_end":      "192.168.130.254",
 
   "reclass_config_master":          "192.168.10.90",
-  "infra_config_address":           "172.16.10.90"
+  "infra_config_address":           "172.16.10.90",
+
+  "rabbitmq_openstack_password":          "<<WILL_BE_GENERATED>>",
+  "galera_server_maintenance_password":   "<<WILL_BE_GENERATED>>",
+  "galera_server_admin_password":         "<<WILL_BE_GENERATED>>",
+  "keystone_admin_password":              "<<WILL_BE_GENERATED>>",
+  "keystone_ceilometer_password":         "<<WILL_BE_GENERATED>>",
+  "keystone_cinder_password":             "<<WILL_BE_GENERATED>>",
+  "keystone_glance_password":             "<<WILL_BE_GENERATED>>",
+  "keystone_heat_password":               "<<WILL_BE_GENERATED>>",
+  "keystone_neutron_password":            "<<WILL_BE_GENERATED>>",
+  "keystone_nova_password":               "<<WILL_BE_GENERATED>>",
+  "keystone_designate_password":          "<<WILL_BE_GENERATED>>",
+  "mysql_keystone_password":              "<<WILL_BE_GENERATED>>",
+  "mysql_glance_password":                "<<WILL_BE_GENERATED>>",
+  "mysql_nova_password":                  "<<WILL_BE_GENERATED>>",
+  "mysql_neutron_password":               "<<WILL_BE_GENERATED>>",
+  "mysql_cinder_password":                "<<WILL_BE_GENERATED>>",
+  "mysql_heat_password":                  "<<WILL_BE_GENERATED>>",
+  "mysql_designate_password":             "<<WILL_BE_GENERATED>>",
+  "metadata_password":                    "<<WILL_BE_GENERATED>>",
+  "heat_domain_admin_password":           "<<WILL_BE_GENERATED>>",
+  "artifactory_password":                 "<<WILL_BE_GENERATED>>",
+  "rabbitmq_secret_key":                  "<<WILL_BE_GENERATED>>",
+  "horizon_secret_key":                   "<<WILL_BE_GENERATED>>",
+  "keystone_service_token":               "<<WILL_BE_GENERATED>>"
 }

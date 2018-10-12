@@ -1,0 +1,21 @@
+classes:
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
+- system.linux.system.repo.mcp.extra
+- system.salt.master.pkg
+- system.salt.master.api
+- system.salt.minion.cert.proxy
+- system.salt.minion.ca.salt_master
+- system.reclass.storage.salt
+- system.sphinx.server.doc.reclass
+- cluster.trymcp.cicd.control.leader
+- cluster.trymcp
+parameters:
+  linux:
+    network:
+      interface:
+        ens4:
+          enabled: true
+          type: eth
+          proto: static
+          address: ${_param:single_address}
+          netmask: 255.255.255.0

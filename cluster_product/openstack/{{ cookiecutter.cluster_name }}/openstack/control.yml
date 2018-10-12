@@ -22,7 +22,6 @@ classes:
 - service.git.client
 - system.openssh.client.lab
 - system.salt.minion.cert.mysql.server
-- system.salt.minion.cert.rabbitmq_server
 - system.salt.minion.cert.proxy
 - system.memcached.server.single
 - system.auditd.server.ciscat

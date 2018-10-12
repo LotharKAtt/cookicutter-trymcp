@@ -1,3 +1,0 @@
-classses:
-- cluster.{{ cookiecutter.cluster_name }}.cicd.control.leader
-- cluster.{{ cookiecutter.cluster_name }}.cicd.control.manager
