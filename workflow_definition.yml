@@ -8,12 +8,6 @@ general_params_action:
       This section covers basic deployment parameters. Supported deployment type is all-in-one for OpenStack.
 
     fields:
-        # remove ?????
-      - initial: "{{ 64|generate_password }}"
-        name: context_seed
-        type: TEXT
-        hidden: True
-
       - name: "cluster_name"
         type: "TEXT"
         help_text: "Name of the cluster, used as cluster/<cluster_name>/ in directory structure."
@@ -41,7 +35,7 @@ general_params_action:
         type: "TEXT"
         help_text: "Hostname for openstack server"
         initial: "tvm01"
-      - name: "rabbitmq_openstack_version"
+      - name: "rabbitmq_openstack_password"
         type: "TEXT"
         help_text: "Password for rabbitmq"
         initial: "{{ 32|generate_password }}"
