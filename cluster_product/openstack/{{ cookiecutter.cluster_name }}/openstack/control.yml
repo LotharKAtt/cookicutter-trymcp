@@ -25,7 +25,7 @@ classes:
 - system.salt.minion.cert.proxy
 - system.memcached.server.single
 - system.auditd.server.ciscat
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.openstack
 parameters:
   neutron:
     server:
