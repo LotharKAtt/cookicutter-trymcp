@@ -14,9 +14,6 @@
   "neutron_public_subnet_start":    "192.168.130.10",
   "neutron_public_subnet_end":      "192.168.130.254",
 
-  "reclass_config_master":          "192.168.10.90",
-  "infra_config_address":           "172.16.10.90",
-
   "rabbitmq_openstack_password":          "<<WILL_BE_GENERATED>>",
   "galera_server_maintenance_password":   "<<WILL_BE_GENERATED>>",
   "galera_server_admin_password":         "<<WILL_BE_GENERATED>>",
