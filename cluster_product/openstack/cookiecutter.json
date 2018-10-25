@@ -14,6 +14,7 @@
   "neutron_public_subnet_start":    "192.168.130.10",
   "neutron_public_subnet_end":      "192.168.130.254",
 
+  "rabbitmq_admin_password":              "<<WILL_BE_GENERATED>>",
   "rabbitmq_openstack_password":          "<<WILL_BE_GENERATED>>",
   "galera_server_maintenance_password":   "<<WILL_BE_GENERATED>>",
   "galera_server_admin_password":         "<<WILL_BE_GENERATED>>",

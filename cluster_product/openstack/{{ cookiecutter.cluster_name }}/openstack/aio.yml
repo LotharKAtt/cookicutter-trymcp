@@ -23,5 +23,5 @@ parameters:
         aio01:
           address: ${_param:aio01_node_address}
           names:
-          - ${_param:aio_node_hostname}
-          - ${_param:aio_node_hostname}.${_param:cluster_domain}
+          - ${_param:aio01_node_hostname}
+          - ${_param:aio01_node_hostname}.${_param:cluster_domain}
