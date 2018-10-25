@@ -1,7 +1,6 @@
 {
   "cluster_name":                   "trymcp",
   "cluster_domain":                 "trymcp.local",
-  "mcp_version":                    "2018.8.0",
   "openstack_version":              "pike",
 
   "aio_node_hostname":              "aos01",
