@@ -5,6 +5,7 @@ parameters:
     loopback_device_size: 20
     salt_minion_ca_host: ${linux:network:fqdn}
 
+    cluster_name: {{ cookiecutter.cluster_name }}
     cluster_domain: {{ cookiecutter.cluster_domain }}
     openstack_version: {{ cookiecutter.openstack_version }}
     openstack_node_role: primary
