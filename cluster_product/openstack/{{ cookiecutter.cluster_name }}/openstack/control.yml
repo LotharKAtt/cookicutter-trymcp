@@ -29,6 +29,7 @@ classes:
 parameters:
   neutron:
     server:
+      role: ${_param:openstack_node_role} # TODO: move this param to system.neutron.control.openvswitch.single
       pkgs:
         - neutron-server
         - python-neutron-lbaas
