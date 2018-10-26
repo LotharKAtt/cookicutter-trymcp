@@ -114,8 +114,6 @@ parameters:
       enabled: ${_param:designate_worker_enabled}
 {%- endif %}
   glance:
-    client:
-      enabled: True
     server:
       database:
         ssl:
