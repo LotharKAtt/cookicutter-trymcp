@@ -3,6 +3,7 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.salt
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
 - system.linux.system.single.debian
 - system.linux.storage.loopback
 - cluster.{{ cookiecutter.cluster_name }}.openstack.control
