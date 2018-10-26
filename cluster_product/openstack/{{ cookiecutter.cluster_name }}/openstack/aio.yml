@@ -19,6 +19,23 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 parameters:
   linux:
+    system:
+      # user and group keystone must exist before Apache state
+      user:
+        keystone:
+          enabled: true
+          name: keystone
+          home: /var/lib/keystone
+          shell: /bin/bash
+          system: true
+          uid: 301
+          gid: 301
+      group:
+        keystone:
+          enabled: true
+          name: keystone
+          system: true
+          gid: 301
     network:
       host:
         aio01:
