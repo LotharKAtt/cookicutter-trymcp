@@ -1,6 +1,8 @@
 classes:
 - system.horizon.server.single
 parameters:
+  _param:
+    horizon_identity_host: ${_param:single_address} # doesn't work from init ?
   horizon:
     server:
       secure: False

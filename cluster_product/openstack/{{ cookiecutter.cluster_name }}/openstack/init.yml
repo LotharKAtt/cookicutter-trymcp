@@ -39,7 +39,6 @@ parameters:
     tenant_address: ${_param:single_address}
     horizon_identity_encryption: none
     horizon_identity_version: 2
-    horizon_identity_host: ${_param:single_address}
 {%- if cookiecutter.designate_enabled == 'True' %}
     designate_admin_api_enabled: true
     designate_bind9_rndc_key: 4pc+X4PDqb2q+5o72dISm72LM1Ds9X2EYZjqg+nmsS7FhdTwzFFY8l/iEDmHxnyjkA33EQC8H+z0fLLBunoitw==
