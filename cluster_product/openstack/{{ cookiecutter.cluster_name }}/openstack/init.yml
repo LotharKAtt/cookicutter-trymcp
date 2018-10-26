@@ -69,7 +69,7 @@ parameters:
     openstack_public_neutron_subnet_cidr: {{ cookiecutter.neutron_public_subnet_cidr }}
     openstack_public_neutron_subnet_allocation_start: {{ cookiecutter.neutron_public_subnet_start }}
     openstack_public_neutron_subnet_allocation_end: {{ cookiecutter.neutron_public_subnet_end }}
-    galera_ssl_enabled: true
+    galera_ssl_enabled: false
     rabbitmq_admin_password: {{ cookiecutter.rabbitmq_admin_password }}
     rabbitmq_ssl_enabled: false # untill rabbitmq formula with https://gerrit.mcp.mirantis.net/#/c/15198/ promoted to stable
     rabbitmq_port: 5672 # for non-ssl use 5672/for ssl 5671
