@@ -1,12 +1,12 @@
 classes:
 - service.neutron.gateway.single
-parametrs:
+parameters:
   neutron:
     gateway:
       metadata:
         workers: 2
       agent_mode: dvr_snat
-      dvr: True
+      dvr: true
       message_queue:
         port: ${_param:rabbitmq_port}
         ssl:
