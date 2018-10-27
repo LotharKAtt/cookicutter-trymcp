@@ -3,25 +3,43 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.salt
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
 - system.linux.system.single.debian
 - system.linux.storage.loopback
-- cluster.{{ cookiecutter.cluster_name }}.control
-- cluster.{{ cookiecutter.cluster_name }}.control_init
-- cluster.{{ cookiecutter.cluster_name }}.secret
-- cluster.{{ cookiecutter.cluster_name }}.proxy
-- cluster.{{ cookiecutter.cluster_name }}.dashboard
-- cluster.{{ cookiecutter.cluster_name }}.gateway
-- cluster.{{ cookiecutter.cluster_name }}.message_queue
-- cluster.{{ cookiecutter.cluster_name }}.database
-- cluster.{{ cookiecutter.cluster_name }}.database_init
-- cluster.{{ cookiecutter.cluster_name }}.networking
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.openstack.control
+- cluster.{{ cookiecutter.cluster_name }}.openstack.control_init
+- cluster.{{ cookiecutter.cluster_name }}.openstack.secret
+- cluster.{{ cookiecutter.cluster_name }}.openstack.proxy
+- cluster.{{ cookiecutter.cluster_name }}.openstack.dashboard
+- cluster.{{ cookiecutter.cluster_name }}.openstack.gateway
+- cluster.{{ cookiecutter.cluster_name }}.openstack.message_queue
+- cluster.{{ cookiecutter.cluster_name }}.openstack.database
+- cluster.{{ cookiecutter.cluster_name }}.openstack.database_init
+- cluster.{{ cookiecutter.cluster_name }}.openstack.networking
+- cluster.{{ cookiecutter.cluster_name }}.openstack
 parameters:
   linux:
+    system:
+      # user and group keystone must exist before Apache state
+      user:
+        keystone:
+          enabled: true
+          name: keystone
+          home: /var/lib/keystone
+          shell: /bin/bash
+          system: true
+          uid: 301
+          gid: 301
+      group:
+        keystone:
+          enabled: true
+          name: keystone
+          system: true
+          gid: 301
     network:
       host:
         aio01:
           address: ${_param:aio01_node_address}
           names:
-          - ${_param:aio_node_hostname}
-          - ${_param:aio_node_hostname}.${_param:cluster_domain}
+          - ${_param:aio01_node_hostname}
+          - ${_param:aio01_node_hostname}.${_param:cluster_domain}

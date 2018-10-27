@@ -25,10 +25,11 @@ classes:
 - system.salt.minion.cert.proxy
 - system.memcached.server.single
 - system.auditd.server.ciscat
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.openstack
 parameters:
   neutron:
     server:
+      role: ${_param:openstack_node_role} # TODO: move this param to system.neutron.control.openvswitch.single
       pkgs:
         - neutron-server
         - python-neutron-lbaas
@@ -114,8 +115,6 @@ parameters:
       enabled: ${_param:designate_worker_enabled}
 {%- endif %}
   glance:
-    client:
-      enabled: True
     server:
       database:
         ssl:

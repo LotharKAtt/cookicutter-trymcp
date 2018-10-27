@@ -5,10 +5,12 @@ parameters:
     loopback_device_size: 20
     salt_minion_ca_host: ${linux:network:fqdn}
 
+    cluster_name: {{ cookiecutter.cluster_name }}
+    cluster_domain: {{ cookiecutter.cluster_domain }}
     openstack_version: {{ cookiecutter.openstack_version }}
     openstack_node_role: primary
     aio01_node_hostname: {{ cookiecutter.aio_node_hostname }}
-    aio01_node_addresss: ${_param:single_address}
+    aio01_node_address: ${_param:single_address}
 
     cluster_public_host: ${_param:single_address}
     cluster_public_protocol: http
@@ -37,7 +39,6 @@ parameters:
     tenant_address: ${_param:single_address}
     horizon_identity_encryption: none
     horizon_identity_version: 2
-    horizon_identity_host: ${_param:single_address}
 {%- if cookiecutter.designate_enabled == 'True' %}
     designate_admin_api_enabled: true
     designate_bind9_rndc_key: 4pc+X4PDqb2q+5o72dISm72LM1Ds9X2EYZjqg+nmsS7FhdTwzFFY8l/iEDmHxnyjkA33EQC8H+z0fLLBunoitw==
@@ -68,7 +69,7 @@ parameters:
     openstack_public_neutron_subnet_cidr: {{ cookiecutter.neutron_public_subnet_cidr }}
     openstack_public_neutron_subnet_allocation_start: {{ cookiecutter.neutron_public_subnet_start }}
     openstack_public_neutron_subnet_allocation_end: {{ cookiecutter.neutron_public_subnet_end }}
-    galera_ssl_enabled: true
+    galera_ssl_enabled: false
     rabbitmq_ssl_enabled: false # untill rabbitmq formula with https://gerrit.mcp.mirantis.net/#/c/15198/ promoted to stable
     rabbitmq_port: 5672 # for non-ssl use 5672/for ssl 5671
 {%- if cookiecutter.tempest_enabled == 'True' %}
