@@ -144,6 +144,10 @@ general_params_action:
         help_test: "External IP address of Drivetrain node"
         width: "half"
       # REQUIRED BY PIPELINE - HIDDEN WITH DEFAULT
+      - name: "mcp_common_scripts_repo"
+        type: "TEXT"
+        initial: "https://github.com/Mirantis/mcp-common-scripts"
+        hidden: True
       - name: "mcp_version"
         type: "TEXT"
         initial: "2018.8.0"
