@@ -189,6 +189,10 @@ general_params_action:
         type: "BOOL"
         initial: false
         hidden: True
+      - name: "docker_deployment"
+        type: "BOOL"
+        initial: true
+        hidden: True
       - name: "test_model"
         type: "BOOL"
         initial: false
